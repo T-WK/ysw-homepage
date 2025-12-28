@@ -1,0 +1,232 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>약석원 좌운 체험관 | Explore</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sand: "#F5F5DC",
+            ivory: "#FAF7F0",
+            wood: "#CBB792",
+            bronze: "#8A6A46",
+            cocoa: "#5C4630"
+          },
+          boxShadow: {
+            soft: "0 18px 40px rgba(90, 70, 50, 0.12)"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --mist: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.7), transparent 55%),
+        radial-gradient(circle at 90% 10%, rgba(245, 230, 205, 0.5), transparent 50%),
+        radial-gradient(circle at 30% 80%, rgba(229, 214, 190, 0.4), transparent 60%);
+    }
+    body {
+      font-family: "Noto Sans KR", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      background-image: var(--mist);
+      background-color: #faf7f0;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 900ms ease, transform 900ms ease;
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(220, 205, 180, 0.6);
+      border-radius: 28px;
+      box-shadow: 0 14px 30px rgba(90, 70, 50, 0.08);
+    }
+    .hover-lift {
+      transition: transform 300ms ease, box-shadow 300ms ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 44px rgba(90, 70, 50, 0.16);
+    }
+    .section-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(138, 106, 70, 0.45), transparent);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(138, 106, 70, 0.1);
+      color: #6a4d30;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body class="text-cocoa">
+  <div class="min-h-screen flex flex-col">
+    <!-- Header (shared) -->
+    <header class="sticky top-0 z-50 border-b border-wood/30 bg-ivory/90 backdrop-blur">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="index.html" class="text-lg font-semibold tracking-wide">약석원 좌운 체험관</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="index.html" class="hover:text-bronze transition">Home</a>
+          <a href="about.html" class="hover:text-bronze transition">About</a>
+          <a href="experience.html" class="hover:text-bronze transition">Experience</a>
+          <a href="explore.html" class="text-bronze font-semibold">Explore</a>
+        </nav>
+        <a href="experience.html" class="text-sm px-4 py-2 rounded-full border border-bronze text-bronze hover:bg-bronze hover:text-white transition">예약 문의</a>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <!-- Hero -->
+      <section class="max-w-6xl mx-auto px-6 py-16">
+        <div class="grid gap-10 lg:grid-cols-2 items-center">
+          <div class="reveal">
+            <span class="badge">Explore</span>
+            <h1 class="mt-6 text-3xl md:text-4xl font-semibold">따뜻한 체험 뒤, 강화의 풍경을 따라 걷다</h1>
+            <p class="mt-4 text-base text-cocoa/70">좌운 체험과 함께 천천히 머무를 수 있는 주변 관광지와 놀잇거리를 제안합니다.</p>
+          </div>
+          <div class="reveal">
+            <div class="card p-6">
+              <p class="text-sm text-cocoa/70">추천 코스</p>
+              <p class="mt-2 text-xl font-semibold">좌운 체험 → 바다 산책 → 로컬 티룸</p>
+              <p class="mt-3 text-sm text-cocoa/60">고요한 동선을 따라 하루를 마무리해보세요.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Core Insight (shared) -->
+      <section class="max-w-6xl mx-auto px-6 pb-12">
+        <div class="card p-8 reveal">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <p class="text-sm uppercase tracking-[0.35em] text-bronze">핵심 체험 포인트</p>
+              <h2 class="mt-3 text-2xl font-semibold">훈연과 온열이 동시에 스며드는 하복부 집중 치유</h2>
+              <p class="mt-3 text-cocoa/70">강화에서 재배한 사자발 약쑥을 태운 훈연 연기와 온열 열기가 함께 작용하여 하부 깊숙이 흡수되는 치유법을 체험합니다.</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="badge">강화 약쑥</span>
+              <span class="badge">훈연 + 온열</span>
+              <span class="badge">하복부 집중</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Explore Cards -->
+      <section class="max-w-6xl mx-auto px-6 pb-16">
+        <div class="flex items-center justify-between gap-6 reveal">
+          <h2 class="text-2xl font-semibold">주변 관광지 & 놀잇거리</h2>
+          <div class="section-line flex-1"></div>
+        </div>
+        <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="card hover-lift p-6 reveal">
+            <img src="assets/images/index_banner.png" alt="강화 바다 산책" class="h-40 w-full rounded-2xl object-cover" />
+            <div class="mt-4 flex items-center justify-between">
+              <h3 class="text-lg font-semibold">강화 바다 산책길</h3>
+              <span class="badge">추천</span>
+            </div>
+            <p class="mt-2 text-sm text-cocoa/70">바닷바람과 함께 온기를 천천히 정돈하는 산책 코스.</p>
+          </div>
+          <div class="card hover-lift p-6 reveal">
+            <img src="assets/images/index_banner.png" alt="로컬 티룸" class="h-40 w-full rounded-2xl object-cover" />
+            <div class="mt-4 flex items-center justify-between">
+              <h3 class="text-lg font-semibold">로컬 티룸</h3>
+              <span class="badge">힐링</span>
+            </div>
+            <p class="mt-2 text-sm text-cocoa/70">따뜻한 차와 함께 체험의 여운을 이어가는 시간.</p>
+          </div>
+          <div class="card hover-lift p-6 reveal">
+            <img src="assets/images/index_banner.png" alt="한옥 포토 스팟" class="h-40 w-full rounded-2xl object-cover" />
+            <div class="mt-4 flex items-center justify-between">
+              <h3 class="text-lg font-semibold">고즈넉한 한옥 거리</h3>
+              <span class="badge">포인트</span>
+            </div>
+            <p class="mt-2 text-sm text-cocoa/70">전통의 분위기 속에서 사진과 산책을 즐겨보세요.</p>
+          </div>
+          <div class="card hover-lift p-6 reveal">
+            <img src="assets/images/index_banner.png" alt="강화 수목원" class="h-40 w-full rounded-2xl object-cover" />
+            <div class="mt-4 flex items-center justify-between">
+              <h3 class="text-lg font-semibold">강화 수목원</h3>
+              <span class="badge">산책</span>
+            </div>
+            <p class="mt-2 text-sm text-cocoa/70">녹음 속에서 마음을 가볍게 정리하는 공간.</p>
+          </div>
+          <div class="card hover-lift p-6 reveal">
+            <img src="assets/images/index_banner.png" alt="로컬 마켓" class="h-40 w-full rounded-2xl object-cover" />
+            <div class="mt-4 flex items-center justify-between">
+              <h3 class="text-lg font-semibold">로컬 마켓</h3>
+              <span class="badge">선물</span>
+            </div>
+            <p class="mt-2 text-sm text-cocoa/70">강화의 분위기를 담은 작은 소품과 차를 만나보세요.</p>
+          </div>
+          <div class="card hover-lift p-6 reveal">
+            <img src="assets/images/index_banner.png" alt="드라이브 코스" class="h-40 w-full rounded-2xl object-cover" />
+            <div class="mt-4 flex items-center justify-between">
+              <h3 class="text-lg font-semibold">해안 드라이브 코스</h3>
+              <span class="badge">휴식</span>
+            </div>
+            <p class="mt-2 text-sm text-cocoa/70">창 밖으로 펼쳐지는 바다 풍경이 여운을 더합니다.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer (shared) -->
+    <footer class="border-t border-wood/30 bg-ivory/80">
+      <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-sm">
+        <div>
+          <p class="font-semibold">약석원 좌운 체험관</p>
+          <p class="text-cocoa/60">강화 약쑥으로 완성하는 따뜻한 치유의 시간</p>
+        </div>
+        <div class="flex gap-4">
+          <a href="about.html" class="hover:text-bronze transition">About</a>
+          <a href="experience.html" class="hover:text-bronze transition">Experience</a>
+          <a href="explore.html" class="hover:text-bronze transition">Explore</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- IntersectionObserver -->
+  <script>
+    const elements = document.querySelectorAll(".reveal");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      elements.forEach((el) => el.classList.add("in-view"));
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.18 }
+      );
+      elements.forEach((el, index) => {
+        el.style.transitionDelay = `${Math.min(index * 70, 280)}ms`;
+        observer.observe(el);
+      });
+    }
+  </script>
+</body>
+</html>

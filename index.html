@@ -1,0 +1,284 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>약석원 좌운 체험관 | Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sand: "#F5F5DC",
+            ivory: "#FAF7F0",
+            wood: "#CBB792",
+            bronze: "#8A6A46",
+            cocoa: "#5C4630"
+          },
+          boxShadow: {
+            soft: "0 18px 40px rgba(90, 70, 50, 0.12)"
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --mist: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.7), transparent 55%),
+        radial-gradient(circle at 90% 10%, rgba(245, 230, 205, 0.5), transparent 50%),
+        radial-gradient(circle at 30% 80%, rgba(229, 214, 190, 0.4), transparent 60%);
+    }
+    body {
+      font-family: "Noto Sans KR", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      background-image: var(--mist);
+      background-color: #faf7f0;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 900ms ease, transform 900ms ease;
+    }
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(220, 205, 180, 0.6);
+      border-radius: 28px;
+      box-shadow: 0 14px 30px rgba(90, 70, 50, 0.08);
+    }
+    .hover-lift {
+      transition: transform 300ms ease, box-shadow 300ms ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 44px rgba(90, 70, 50, 0.16);
+    }
+    .section-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(138, 106, 70, 0.45), transparent);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(138, 106, 70, 0.1);
+      color: #6a4d30;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body class="text-cocoa">
+  <div class="min-h-screen flex flex-col">
+    <!-- Header (shared) -->
+    <header class="sticky top-0 z-50 border-b border-wood/30 bg-ivory/90 backdrop-blur">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="index.html" class="text-lg font-semibold tracking-wide">약석원 좌운 체험관</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="index.html" class="text-bronze font-semibold">Home</a>
+          <a href="about.html" class="hover:text-bronze transition">About</a>
+          <a href="experience.html" class="hover:text-bronze transition">Experience</a>
+          <a href="explore.html" class="hover:text-bronze transition">Explore</a>
+        </nav>
+        <a href="experience.html" class="text-sm px-4 py-2 rounded-full border border-bronze text-bronze hover:bg-bronze hover:text-white transition">예약 문의</a>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <!-- Hero -->
+      <section class="relative overflow-hidden">
+        <div class="absolute inset-0 hidden md:block">
+          <video class="h-full w-full object-cover" src="assets/videos/introductory-video.mp4" autoplay muted loop playsinline poster="assets/images/index_banner.png"></video>
+          <div class="absolute inset-0 bg-[#F5F0E6]/70"></div>
+        </div>
+        <div class="absolute inset-0 md:hidden">
+          <img src="assets/images/index_banner.png" alt="좌운 체험관 분위기" class="h-full w-full object-cover" />
+          <div class="absolute inset-0 bg-[#F5F0E6]/70"></div>
+        </div>
+        <div class="relative z-10 max-w-6xl mx-auto px-6 py-24 md:py-32">
+          <div class="max-w-2xl reveal">
+            <span class="badge">Warm Wellness</span>
+            <h1 class="mt-6 text-3xl md:text-5xl font-semibold leading-tight">약석원 좌운 체험관: 내 몸을 깨우는 가장 따뜻한 휴식</h1>
+            <p class="mt-5 text-lg text-cocoa/80">전통의 지혜와 현대적 치유가 만나는 하복부 집중 온열 테라피</p>
+            <p class="mt-4 text-base text-cocoa/70">강화 사자발 약쑥을 태운 훈연과 온열이 동시에 작용해, 하부 깊은 곳까지 스며드는 따뜻함을 경험합니다.</p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="experience.html" class="px-6 py-3 rounded-full bg-bronze text-white text-sm font-semibold shadow-soft hover:shadow-lg transition">체험 예약하기</a>
+              <a href="experience.html" class="px-6 py-3 rounded-full border border-bronze text-bronze text-sm font-semibold hover:bg-bronze hover:text-white transition">3단계 체험 알아보기</a>
+            </div>
+            <p class="mt-6 text-xs text-cocoa/60">영상은 데스크톱에서 자동 재생되며, 모바일에서는 정적인 썸네일로 표시됩니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Core Insight (shared) -->
+      <section class="max-w-6xl mx-auto px-6 py-14">
+        <div class="card p-8 reveal">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <p class="text-sm uppercase tracking-[0.35em] text-bronze">핵심 체험 포인트</p>
+              <h2 class="mt-3 text-2xl font-semibold">훈연과 온열이 동시에 스며드는 하복부 집중 치유</h2>
+              <p class="mt-3 text-cocoa/70">강화에서 재배한 사자발 약쑥을 태운 훈연 연기와 온열 열기가 함께 작용하여 하부 깊숙이 흡수되는 치유법을 체험합니다.</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="badge">강화 약쑥</span>
+              <span class="badge">훈연 + 온열</span>
+              <span class="badge">하복부 집중</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 Values -->
+      <section class="max-w-6xl mx-auto px-6 pb-14">
+        <div class="flex items-center justify-between gap-6 reveal">
+          <h2 class="text-2xl font-semibold">5대 핵심 가치</h2>
+          <div class="section-line flex-1"></div>
+        </div>
+        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div class="card hover-lift group p-6 reveal">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">온기</h3>
+              <span class="text-bronze group-hover:translate-x-1 transition">→</span>
+            </div>
+            <p class="mt-3 text-sm text-cocoa/70">몸 안 깊숙이 번지는 부드러운 열감</p>
+          </div>
+          <div class="card hover-lift group p-6 reveal">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">순환</h3>
+              <span class="text-bronze group-hover:translate-x-1 transition">→</span>
+            </div>
+            <p class="mt-3 text-sm text-cocoa/70">하복부 집중 관리로 균형을 돕는 흐름</p>
+          </div>
+          <div class="card hover-lift group p-6 reveal">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">조화</h3>
+              <span class="text-bronze group-hover:translate-x-1 transition">→</span>
+            </div>
+            <p class="mt-3 text-sm text-cocoa/70">전통과 현대의 조화로운 웰니스 리추얼</p>
+          </div>
+          <div class="card hover-lift group p-6 reveal">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">재생</h3>
+              <span class="text-bronze group-hover:translate-x-1 transition">→</span>
+            </div>
+            <p class="mt-3 text-sm text-cocoa/70">부드러운 케어로 회복감을 전달</p>
+          </div>
+          <div class="card hover-lift group p-6 reveal">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">이완</h3>
+              <span class="text-bronze group-hover:translate-x-1 transition">→</span>
+            </div>
+            <p class="mt-3 text-sm text-cocoa/70">긴장을 풀어주는 고요한 휴식의 순간</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why It Works -->
+      <section class="max-w-6xl mx-auto px-6 py-14">
+        <div class="flex items-center justify-between gap-6 reveal">
+          <h2 class="text-2xl font-semibold">Why it works</h2>
+          <div class="section-line flex-1"></div>
+        </div>
+        <div class="mt-8 grid gap-6 md:grid-cols-3">
+          <div class="card p-7 hover-lift reveal">
+            <h3 class="text-lg font-semibold">사자발 약쑥</h3>
+            <p class="mt-3 text-sm text-cocoa/70">강화에서 재배된 원재료의 향과 온기가 깊은 몰입을 돕습니다.</p>
+          </div>
+          <div class="card p-7 hover-lift reveal">
+            <h3 class="text-lg font-semibold">훈연의 밀도</h3>
+            <p class="mt-3 text-sm text-cocoa/70">연무처럼 퍼지는 훈연이 편안한 호흡과 안정감을 제공합니다.</p>
+          </div>
+          <div class="card p-7 hover-lift reveal">
+            <h3 class="text-lg font-semibold">온열의 집중</h3>
+            <p class="mt-3 text-sm text-cocoa/70">하복부에 집중된 온열이 몸의 흐름을 정돈합니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3-Step Preview -->
+      <section class="max-w-6xl mx-auto px-6 py-14">
+        <div class="flex items-center justify-between gap-6 reveal">
+          <h2 class="text-2xl font-semibold">3단계 체험 요약</h2>
+          <div class="section-line flex-1"></div>
+        </div>
+        <div class="mt-8 grid gap-8 md:grid-cols-3">
+          <div class="card p-6 hover-lift reveal">
+            <img src="assets/images/index_banner.png" alt="준비 단계" class="h-40 w-full rounded-2xl object-cover" />
+            <h3 class="mt-5 text-lg font-semibold">Step 1. 준비 & 컨디션 체크</h3>
+            <p class="mt-2 text-sm text-cocoa/70">오늘의 컨디션을 확인하고 부드러운 리추얼로 시작합니다.</p>
+          </div>
+          <div class="card p-6 hover-lift reveal">
+            <img src="assets/images/jar-girl.png" alt="약쑥 훈연" class="h-40 w-full rounded-2xl object-cover" />
+            <h3 class="mt-5 text-lg font-semibold">Step 2. 약쑥 훈연 + 온열 집중</h3>
+            <p class="mt-2 text-sm text-cocoa/70">향과 온기가 동시에 스며드는 깊은 체험 구간입니다.</p>
+          </div>
+          <div class="card p-6 hover-lift reveal">
+            <img src="assets/images/tteum-girl.png" alt="마무리 케어" class="h-40 w-full rounded-2xl object-cover" />
+            <h3 class="mt-5 text-lg font-semibold">Step 3. 마무리 & 리커버리</h3>
+            <p class="mt-2 text-sm text-cocoa/70">뜨끈한 케어로 안정감을 더하며 마무리합니다.</p>
+          </div>
+        </div>
+        <div class="mt-8 flex justify-center reveal">
+          <a href="experience.html" class="px-6 py-3 rounded-full bg-cocoa text-white text-sm font-semibold hover:bg-bronze transition">Experience 페이지로 이동</a>
+        </div>
+      </section>
+
+      <!-- Quote -->
+      <section class="max-w-6xl mx-auto px-6 pb-20">
+        <div class="card p-10 text-center reveal">
+          <p class="text-xl md:text-2xl font-medium">“좌운은 온기와 향이 어우러져, 몸이 기억하는 가장 편안한 리듬을 되찾게 합니다.”</p>
+          <p class="mt-4 text-sm text-cocoa/60">약석원 좌운 체험관</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer (shared) -->
+    <footer class="border-t border-wood/30 bg-ivory/80">
+      <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-sm">
+        <div>
+          <p class="font-semibold">약석원 좌운 체험관</p>
+          <p class="text-cocoa/60">강화 약쑥으로 완성하는 따뜻한 치유의 시간</p>
+        </div>
+        <div class="flex gap-4">
+          <a href="about.html" class="hover:text-bronze transition">About</a>
+          <a href="experience.html" class="hover:text-bronze transition">Experience</a>
+          <a href="explore.html" class="hover:text-bronze transition">Explore</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- IntersectionObserver -->
+  <script>
+    const elements = document.querySelectorAll(".reveal");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      elements.forEach((el) => el.classList.add("in-view"));
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.18 }
+      );
+      elements.forEach((el, index) => {
+        el.style.transitionDelay = `${Math.min(index * 70, 280)}ms`;
+        observer.observe(el);
+      });
+    }
+  </script>
+</body>
+</html>
