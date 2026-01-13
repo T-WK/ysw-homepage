@@ -1,284 +1,494 @@
-﻿<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>약석원 좌운 체험관 | Home</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            sand: "#F5F5DC",
-            ivory: "#FAF7F0",
-            wood: "#CBB792",
-            bronze: "#8A6A46",
-            cocoa: "#5C4630"
-          },
-          boxShadow: {
-            soft: "0 18px 40px rgba(90, 70, 50, 0.12)"
-          }
-        }
-      }
-    };
-  </script>
-  <style>
-    :root {
-      --mist: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.7), transparent 55%),
-        radial-gradient(circle at 90% 10%, rgba(245, 230, 205, 0.5), transparent 50%),
-        radial-gradient(circle at 30% 80%, rgba(229, 214, 190, 0.4), transparent 60%);
-    }
-    body {
-      font-family: "Noto Sans KR", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-      background-image: var(--mist);
-      background-color: #faf7f0;
-    }
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 900ms ease, transform 900ms ease;
-    }
-    .reveal.in-view {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .card {
-      background: rgba(255, 255, 255, 0.78);
-      border: 1px solid rgba(220, 205, 180, 0.6);
-      border-radius: 28px;
-      box-shadow: 0 14px 30px rgba(90, 70, 50, 0.08);
-    }
-    .hover-lift {
-      transition: transform 300ms ease, box-shadow 300ms ease;
-    }
-    .hover-lift:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 22px 44px rgba(90, 70, 50, 0.16);
-    }
-    .section-line {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(138, 106, 70, 0.45), transparent);
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: rgba(138, 106, 70, 0.1);
-      color: #6a4d30;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-  </style>
-</head>
-<body class="text-cocoa">
-  <div class="min-h-screen flex flex-col">
-    <!-- Header (shared) -->
-    <header class="sticky top-0 z-50 border-b border-wood/30 bg-ivory/90 backdrop-blur">
-      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="index.html" class="text-lg font-semibold tracking-wide">약석원 좌운 체험관</a>
-        <nav class="hidden md:flex items-center gap-6 text-sm">
-          <a href="index.html" class="text-bronze font-semibold">Home</a>
-          <a href="about.html" class="hover:text-bronze transition">About</a>
-          <a href="experience.html" class="hover:text-bronze transition">Experience</a>
-          <a href="explore.html" class="hover:text-bronze transition">Explore</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>약석원시흥월곶점</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" role="banner">
+      <div class="container header__inner">
+        <div class="logo" aria-label="site logo">약석원시흥월곶점</div>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="#home" class="nav-link" data-section="home">Home</a>
+          <a href="#about" class="nav-link" data-section="about">About</a>
+          <a href="#experience" class="nav-link" data-section="experience"
+            >Experience</a
+          >
+          <a href="#explore" class="nav-link" data-section="explore">Explore</a>
         </nav>
-        <a href="experience.html" class="text-sm px-4 py-2 rounded-full border border-bronze text-bronze hover:bg-bronze hover:text-white transition">예약 문의</a>
       </div>
     </header>
 
-    <main class="flex-1">
-      <!-- Hero -->
-      <section class="relative overflow-hidden">
-        <div class="absolute inset-0 hidden md:block">
-          <video class="h-full w-full object-cover" src="assets/videos/introductory-video.mp4" autoplay muted loop playsinline poster="assets/images/index_banner.png"></video>
-          <div class="absolute inset-0 bg-[#F5F0E6]/70"></div>
+    <main>
+      <section id="home" class="section section--home" aria-label="Home">
+        <div class="container">
+          <div
+            class="section__block image-placeholder image-1"
+            aria-label="image_1 placeholder"
+          >
+            <img
+              src="assets/images/image_1.jpg"
+              alt="image_1"
+              loading="lazy"
+            />
+          </div>
+          <div class="section__block text-card text-area-center">
+            <!-- wireframe: text_area_1 -->
+            <p>
+              약석원 본점은 깊은 산 중턱에 자리한<br />
+              고요한 치유 공간에서 시작되었습니다.<br />
+              <br />
+              자연이 길러낸 강화약쑥은<br />
+              오랜 세월 우리 전통 건강법에서 사랑받아온 약재입니다.<br />
+              순수한 자연환경에서 자란 강화약쑥은<br />
+              일반 약쑥보다 유효 성분이 풍부하고,<br />
+              그 온기가 몸 깊숙이 퍼지는 듯한 편안함을 선사합니다.<br />
+              <br />
+              이 강화약쑥의 따뜻한 기운을<br />
+              더 많은 분들이 일상 속에서도 누릴 수 있도록<br />
+              시흥월곶에 새로운 쉼을 마련했습니다.<br />
+              <br />
+              한국 전통의 온돌방과 기와의 멋을 그대로 담아낸<br />
+              도심 속 한옥형 힐링 공간<br />
+              모든 케어는 프라이빗하게 온돌방에서 진행됩니다.<br />
+              <br />
+              문을 열고 들어서는 순간,<br />
+              강화약쑥의 은은한 향과 따뜻한 온기가<br />
+              몸과 마음을 함께 감싸 안습니다.<br />
+              <br />
+              멀리 떠나지 않아도 괜찮습니다.<br />
+              바쁜 하루 속에서도<br />
+              자밋 쉬어갈 수 있는 곳,<br />
+              약석원 시흥월곶점에서<br />
+              강화 약쑥의 깊은 온도를 느껴보세요.<br />
+              <br />
+              강화약쑥과 전통 한옥의 온기.<br />
+              그리고 도심속 편안함이 만나는 곳입니다.<br />
+              <br />
+              건강한 하루는 가까운 곳에서 시작됩니다.
+            </p>
+          </div>
+          <a
+            class="btn btn-primary"
+            href="https://map.naver.com/p/entry/place/1214007532?placePath=/ticket?additionalHeight=76&fromPanelNum=1&locale=ko&svcName=map_pcv5&timestamp=202601131429&reviewSort=recent&fromPanelNum=1&locale=ko&svcName=map_pcv5&timestamp=202601131429&reviewSort=recent&additionalHeight=76&c=15.00,0,0,0,dh"
+            aria-label="linked_button_1"
+            >체험 예약하기</a
+          >
         </div>
-        <div class="absolute inset-0 md:hidden">
-          <img src="assets/images/index_banner.png" alt="좌운 체험관 분위기" class="h-full w-full object-cover" />
-          <div class="absolute inset-0 bg-[#F5F0E6]/70"></div>
-        </div>
-        <div class="relative z-10 max-w-6xl mx-auto px-6 py-24 md:py-32">
-          <div class="max-w-2xl reveal">
-            <span class="badge">Warm Wellness</span>
-            <h1 class="mt-6 text-3xl md:text-5xl font-semibold leading-tight">약석원 좌운 체험관: 내 몸을 깨우는 가장 따뜻한 휴식</h1>
-            <p class="mt-5 text-lg text-cocoa/80">전통의 지혜와 현대적 치유가 만나는 하복부 집중 온열 테라피</p>
-            <p class="mt-4 text-base text-cocoa/70">강화 사자발 약쑥을 태운 훈연과 온열이 동시에 작용해, 하부 깊은 곳까지 스며드는 따뜻함을 경험합니다.</p>
-            <div class="mt-8 flex flex-wrap gap-3">
-              <a href="experience.html" class="px-6 py-3 rounded-full bg-bronze text-white text-sm font-semibold shadow-soft hover:shadow-lg transition">체험 예약하기</a>
-              <a href="experience.html" class="px-6 py-3 rounded-full border border-bronze text-bronze text-sm font-semibold hover:bg-bronze hover:text-white transition">3단계 체험 알아보기</a>
+      </section>
+
+      <section id="about" class="section section--about" aria-label="About">
+        <div class="container">
+          <!-- <div class="title-chip">title</div> -->
+          <h2 class="block-title">
+            약석원에서 사용하는 강화쑥에 대해 알아보기
+          </h2>
+
+          <div class="two-col">
+            <div
+              class="image-placeholder image-2"
+              aria-label="image_2 placeholder"
+            >
+              <img
+                src="assets/images/image_2.jpg"
+                alt="image_2"
+                loading="lazy"
+              />
             </div>
-            <p class="mt-6 text-xs text-cocoa/60">영상은 데스크톱에서 자동 재생되며, 모바일에서는 정적인 썸네일로 표시됩니다.</p>
+            <div class="text-card text-area-2">
+              <!-- wireframe: text_area_2 -->
+              <p>
+                해풍을 맞고자란 '강화약쑥'은 쑥잎의 생김새가 꼭 사자발 모양으로
+                갈라져서<br />
+                마디마디 착생하고 뒷면에 흰털이 나 있어 '사자발쑥'이라고도
+                불립니다.<br />
+                강화에서 자란 사자발약쑥은 비옥한 토양과 해풍을 맞고 자라
+                특히,<br />
+                강화를 벗어나면 모습 자체가 변형되면서 고유의 향과 서운이 사라지
+                는것으로<br />
+                알려져 있어 지역적 특색이 뚜렷한 작물입니다.<br />
+                유파틸린(eupatillin), 자세오시딘(jaceosidin)과 같은
+                플라보노이드의<br />
+                함량이 높아 한약재 도매시장에서 제일로 치는 사자발약쑥을
+                동의보감은<br />
+                독이 없고 만병을 다스리며 부인병에 좋아 자식을 낳게 한다고
+                했으며,<br />
+                본초강목에서는 쑥은 속을 덥게 해 냉을 쫒으며 습을 덜어준다고
+                기록했습니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="two-col reverse">
+            <div class="text-card text-area-3">
+              <!-- wireframe: text_area_3 -->
+              <h3>쑥좌훈과 찜질의 차이</h3>
+              <p>
+                찜질은 주로 외부에서 따뜻한 열을 공급하여 근육 이완과
+                혈액순환을<br />
+                촉진하는 방법입니다. 반면, 쑥좌훈은 쑥의 약성을 증기로
+                전달하여<br />
+                질 내부에 직접적으로 효과를 미치고, 향균 및 소염 작용이
+                이루어<br />집니다.<br /><br />
+                찜질은 일반적으로몸의 특정 부위에 온열 요법을 적용하지만,<br />
+                쑥좌훈은 여성의 생식기를 포함한 전체적인 건강에 도움을
+                주기위한<br />
+                방법으로 사용됩니다.<br /><br />
+                이와 같이 찜질과 쑥좌훈은 모두 온열 요법이지만,<br />
+                그 적용 범위와 효능의 차이가 있음을 알 수 있습니다.
+              </p>
+            </div>
+            <div
+              class="image-placeholder image-3"
+              aria-label="image_3 placeholder"
+            >
+              <img
+                src="assets/images/image_3.jpg"
+                alt="image_3"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <a
+            class="btn btn-primary"
+            href="https://map.naver.com/p/entry/place/1214007532?placePath=/ticket?additionalHeight=76&fromPanelNum=1&locale=ko&svcName=map_pcv5&timestamp=202601131429&reviewSort=recent&fromPanelNum=1&locale=ko&svcName=map_pcv5&timestamp=202601131429&reviewSort=recent&additionalHeight=76&c=15.00,0,0,0,dh"
+            aria-label="linked_button_1"
+            >체험 예약하기</a
+          >
+        </div>
+      </section>
+
+      <section
+        id="experience"
+        class="section section--experience"
+        aria-label="Experience"
+      >
+        <div class="container">
+          <div class="section-block block-a">
+            <div class="image-grid">
+              <div class="image-placeholder image-4"><span>image_4</span></div>
+              <div class="image-placeholder image-5">
+                <img
+                  src="assets/images/image_5.jpg"
+                  alt="image_5"
+                  loading="lazy"
+                />
+              </div>
+              <div class="image-placeholder image-6">
+                <img
+                  src="assets/images/image_6.jpg"
+                  alt="image_6"
+                  loading="lazy"
+                />
+              </div>
+              <div class="image-placeholder image-7">
+                <img
+                  src="assets/images/image_7.jpg"
+                  alt="image_7"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div class="block-text">
+              <h3 class="block-title">약석원 좌훈 체험이란?</h3>
+              <div class="text-card">
+                <!-- wireframe: text_area large -->
+                <p>
+                  우리 고유의 전통 기법으로 만든 옹기세레믹 쑥 좌훈기 안에서
+                  나오는 원적외선 파장과 강화약쑥으로 나오는 열기로 항문혈,
+                  회음혈을 동시에 자극하여 하복부 깊숙히 흡수되어 신진대사를
+                  촉진시켜 면역력을 높여 우리 몸 스스로가 최적의 상태를
+                  유지하도록 도와줍니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-block block-b">
+            <h3 class="block-title">약석원 좌훈 체험을 하면</h3>
+            <div class="image-placeholder image-8 wide">
+              <img
+                src="assets/images/image_8.png"
+                alt="image_8"
+                loading="lazy"
+              />
+            </div>
+            <div class="text-card-grid">
+              <div class="text-card text-area-center">
+                <p>
+                  체내 순환을 촉진해<br />
+                  소변과 땀으로 노폐물이<br />
+                  빠져나가게 해<br />
+                  다이어트를 돕습니다.
+                </p>
+              </div>
+              <div class="text-card text-area-center">
+                <p>
+                  체내를 따뜻하게 해<br />
+                  혈류를 원할하게 하는데 도움을 줍니다
+                </p>
+              </div>
+              <div class="text-card text-area-center">
+                <p>
+                  혈류를 원할하게 해<br />
+                  손발저림에 도움을 주며<br />
+                  또한<br />
+                  몸을 따뜻하게 함으로써<br />
+                  손발이 찬 증상을 완화시키는데<br />
+                  도움을 줍니다
+                </p>
+              </div>
+              <div class="text-card text-area-center">
+                <p>
+                  신진대사를 촉진시켜<br />
+                  면역력을 높여 우리몸 스스로가<br />
+                  최적의 상태로 유지되도록<br />
+                  도움을 줍니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-block block-c">
+            <div class="image-placeholder image-slides">
+              <span>image_slides</span>
+              <button class="slide-btn prev" aria-label="previous slide">
+                &#8592;
+              </button>
+              <button class="slide-btn next" aria-label="next slide">
+                &#8594;
+              </button>
+              <div class="slide-dots" aria-hidden="true">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+            </div>
+            <div class="block-text">
+              <h3 class="block-title">약석원시흥월곶점에서 체험을 하면?</h3>
+              <div class="text-card">
+                <p>
+                  이 모든 과정을 최상의 환경, 쾌적한 환경, 365일 꺼지지 않는<br />
+                  뜨끈뜨끈한 온돌방, 혼자 오셔도, 삼삼오오 오셔도, <br />
+                  부부가 오셔도, 연인이 오셔도<br />
+                  프라이빗한 룸에서 체험하시게 됩니다.<br />
+                  자연에서 시작된 치유, 도심에서 이어집니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-block block-d">
+            <h3 class="block-title">강화 약쑥 좌훈 체험 순서 안내</h3>
+            <div class="card-grid three">
+              <div class="card">
+                <h4 class="card-title">1) 편안한 체험복으로 갈아입기</h4>
+                <div class="image-placeholder image-8">
+                  <img src="assets/images/image_9.png" alt="image_9" loading="lazy" />
+                </div>
+                <div class="text-card">
+                  <p>
+                    약석원에서 제공하는 편안한 체험복으로 갈아입고 준비를
+                    합니다. 좌훈은 증기를 온 몸으로 흡수하는 과정이므로 편안한
+                    체험복으로 갈아입은 순간부터 몸과 마음이 체험에 몰힘할
+                    준비를 하게 됩니다
+                  </p>
+                </div>
+              </div>
+              <div class="card">
+                <h4 class="card-title">
+                  2) 뜨끈뜨끈한 프라이빗룸에서 좌훈 체험 40분
+                </h4>
+                <div class="image-placeholder image-9">
+                  <img src="assets/images/image_10.png" alt="image_10" loading="lazy" />
+                </div>
+                <div class="text-card">
+                  <p>
+                    안내 받은 뜨끈뜨근한 온돌방에서 데워진 좌훈홍기에 앉아
+                    쑥좌훈을 합니다. 온돌방에서 천천히 데워진 옹기좌훈기에 쑥을
+                    태운 뜸기를 넣고 왜혐지는 옹기좌훈기가 안보이게 치마로 푹~
+                    감싸고 앉아 40분 동안 좌훈을 합니다. 이때 약쑥을 태운 연기의
+                    훈연효과는 생식기와 회음혈, 항문혈을 통해 축의 핵심을
+                    전잘하여 질 내부에 직접적으로 효과를 미치고, 향균 및
+                    소염작용이 이루어 집니다. 그리고 몸이 데워지면서 따뜻한 열을
+                    공급하여 근육이완과 혈액순환을 돕고 땀을 통해 노폐물이 배출
+                    됩니다.
+                  </p>
+                </div>
+              </div>
+              <div class="card">
+                <h4 class="card-title">
+                  3) 배와 등에 각각 온열뜸 30분씩 체험
+                </h4>
+                <div class="image-placeholder image-10">
+                  <img src="assets/images/image_11.png" alt="image_11" loading="lazy" />
+                </div>
+                <div class="text-card">
+                  <p>
+                    좌훈을 마친 후에는 뜨끈뜨끈한 방에 누워 온열뜸기를 배와 등에
+                    30분씩 올려놓고 휴식을 취합니다. 이를 통해 2차로 몸이
+                    데워지면서 근육이완과 혈액순환을 돕고 땀을 통해 노폐물이
+                    배출되게끔 도움을 줍니다. 이 과정에서 단순한 온열효과를 넘어
+                    마음의 긴장을 덜어내고 숙면에 도움을 주는 이완의 시간을 갖게
+                    됩니다. 모든 과정은 1시간 40분동안 프라이빗 룸에서 체험하게
+                    되며, 3년 숙성시킨 강화 쑥의 따뜻한 기운이 하복부 깊이
+                    전달되어 내장 기능을 편안하게 하고, 몸의 중심부에서부터
+                    따뜻함이 펴저 나가 몸의 긴장을 풀어주어 눈을 감고 누워
+                    있으면 마치 자연의 품안에 안겨있는 듯 몸과 마음이 안정되어
+                    체험이 끝난 뒤에도 여운이 오래도록 남게 됩니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-block block-e">
+            <div class="block-e-header">
+              <h3 class="block-title">Title</h3>
+              <a
+                class="btn btn-accent"
+                href="https://map.naver.com/p/entry/place/1214007532?placePath=/review?additionalHeight=76&fromPanelNum=1&locale=ko&svcName=map_pcv5&timestamp=202601131429&reviewSort=recent&fromPanelNum=1&locale=ko&svcName=map_pcv5&timestamp=202601131429&reviewSort=recent&additionalHeight=76&c=15.00,0,0,0,dh"
+                aria-label="linked_button"
+                >리뷰 둘러보기</a
+              >
+            </div>
+            <div class="card-grid four">
+              <div class="card">
+                <div class="image-placeholder image-11">
+                  <span>image_12</span>
+                </div>
+                <div class="text-card"><p>text_area</p></div>
+              </div>
+              <div class="card">
+                <div class="image-placeholder image-12">
+                  <span>image_13</span>
+                </div>
+                <div class="text-card"><p>text_area</p></div>
+              </div>
+              <div class="card">
+                <div class="image-placeholder image-13">
+                  <span>image_14</span>
+                </div>
+                <div class="text-card"><p>text_area</p></div>
+              </div>
+              <div class="card">
+                <div class="image-placeholder image-14">
+                  <span>image_15</span>
+                </div>
+                <div class="text-card"><p>text_area</p></div>
+              </div>
+            </div>
+            <a
+              class="btn btn-primary"
+              href="https://map.naver.com/p/entry/place/1214007532?placePath=/ticket?additionalHeight=76&fromPanelNum=1&locale=ko&svcName=map_pcv5&timestamp=202601131429&reviewSort=recent&fromPanelNum=1&locale=ko&svcName=map_pcv5&timestamp=202601131429&reviewSort=recent&additionalHeight=76&c=15.00,0,0,0,dh"
+              aria-label="linked_button"
+              >체험 예약하기</a
+            >
           </div>
         </div>
       </section>
 
-      <!-- Core Insight (shared) -->
-      <section class="max-w-6xl mx-auto px-6 py-14">
-        <div class="card p-8 reveal">
-          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-              <p class="text-sm uppercase tracking-[0.35em] text-bronze">핵심 체험 포인트</p>
-              <h2 class="mt-3 text-2xl font-semibold">훈연과 온열이 동시에 스며드는 하복부 집중 치유</h2>
-              <p class="mt-3 text-cocoa/70">강화에서 재배한 사자발 약쑥을 태운 훈연 연기와 온열 열기가 함께 작용하여 하부 깊숙이 흡수되는 치유법을 체험합니다.</p>
+      <section
+        id="explore"
+        class="section section--explore"
+        aria-label="Explore"
+      >
+        <div class="container">
+          <h2 class="block-title">Title</h2>
+          <div class="card-grid explore-grid">
+            <!-- wireframe: repeat cards -->
+            <div class="explore-card" data-card-id="explore-1">
+              <div class="image-placeholder image-15">
+                <span>image_15</span>
+              </div>
+              <div class="text-card"><p>text_area</p></div>
+              <a href="#" class="inline-link" data-card-id="explore-1">link</a>
             </div>
-            <div class="flex flex-wrap gap-2">
-              <span class="badge">강화 약쑥</span>
-              <span class="badge">훈연 + 온열</span>
-              <span class="badge">하복부 집중</span>
+            <div class="explore-card" data-card-id="explore-2">
+              <div class="image-placeholder image-15">
+                <span>image_15</span>
+              </div>
+              <div class="text-card"><p>text_area</p></div>
+              <a href="#" class="inline-link" data-card-id="explore-2">link</a>
+            </div>
+            <div class="explore-card" data-card-id="explore-3">
+              <div class="image-placeholder image-15">
+                <span>image_15</span>
+              </div>
+              <div class="text-card"><p>text_area</p></div>
+              <a href="#" class="inline-link" data-card-id="explore-3">link</a>
+            </div>
+            <div class="explore-card" data-card-id="explore-4">
+              <div class="image-placeholder image-15">
+                <span>image_15</span>
+              </div>
+              <div class="text-card"><p>text_area</p></div>
+              <a href="#" class="inline-link" data-card-id="explore-4">link</a>
+            </div>
+            <div class="explore-card" data-card-id="explore-5">
+              <div class="image-placeholder image-15">
+                <span>image_15</span>
+              </div>
+              <div class="text-card"><p>text_area</p></div>
+              <a href="#" class="inline-link" data-card-id="explore-5">link</a>
+            </div>
+            <div class="explore-card" data-card-id="explore-6">
+              <div class="image-placeholder image-15">
+                <span>image_15</span>
+              </div>
+              <div class="text-card"><p>text_area</p></div>
+              <a href="#" class="inline-link" data-card-id="explore-6">link</a>
+            </div>
+            <div class="explore-card" data-card-id="explore-7">
+              <div class="image-placeholder image-15">
+                <span>image_15</span>
+              </div>
+              <div class="text-card"><p>text_area</p></div>
+              <a href="#" class="inline-link" data-card-id="explore-7">link</a>
+            </div>
+            <div class="explore-card" data-card-id="explore-8">
+              <div class="image-placeholder image-15">
+                <span>image_15</span>
+              </div>
+              <div class="text-card"><p>text_area</p></div>
+              <a href="#" class="inline-link" data-card-id="explore-8">link</a>
+            </div>
+            <div class="explore-card" data-card-id="explore-9">
+              <div class="image-placeholder image-15">
+                <span>image_15</span>
+              </div>
+              <div class="text-card"><p>text_area</p></div>
+              <a href="#" class="inline-link" data-card-id="explore-9">link</a>
+            </div>
+            <div class="explore-card" data-card-id="explore-10">
+              <div class="image-placeholder image-15">
+                <span>image_15</span>
+              </div>
+              <div class="text-card"><p>text_area</p></div>
+              <a href="#" class="inline-link" data-card-id="explore-10">link</a>
+            </div>
+            <div class="explore-card" data-card-id="explore-11">
+              <div class="image-placeholder image-15">
+                <span>image_15</span>
+              </div>
+              <div class="text-card"><p>text_area</p></div>
+              <a href="#" class="inline-link" data-card-id="explore-11">link</a>
+            </div>
+            <div class="explore-card" data-card-id="explore-12">
+              <div class="image-placeholder image-15">
+                <span>image_15</span>
+              </div>
+              <div class="text-card"><p>text_area</p></div>
+              <a href="#" class="inline-link" data-card-id="explore-12">link</a>
             </div>
           </div>
-        </div>
-      </section>
-
-      <!-- 5 Values -->
-      <section class="max-w-6xl mx-auto px-6 pb-14">
-        <div class="flex items-center justify-between gap-6 reveal">
-          <h2 class="text-2xl font-semibold">5대 핵심 가치</h2>
-          <div class="section-line flex-1"></div>
-        </div>
-        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-          <div class="card hover-lift group p-6 reveal">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold">온기</h3>
-              <span class="text-bronze group-hover:translate-x-1 transition">→</span>
-            </div>
-            <p class="mt-3 text-sm text-cocoa/70">몸 안 깊숙이 번지는 부드러운 열감</p>
-          </div>
-          <div class="card hover-lift group p-6 reveal">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold">순환</h3>
-              <span class="text-bronze group-hover:translate-x-1 transition">→</span>
-            </div>
-            <p class="mt-3 text-sm text-cocoa/70">하복부 집중 관리로 균형을 돕는 흐름</p>
-          </div>
-          <div class="card hover-lift group p-6 reveal">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold">조화</h3>
-              <span class="text-bronze group-hover:translate-x-1 transition">→</span>
-            </div>
-            <p class="mt-3 text-sm text-cocoa/70">전통과 현대의 조화로운 웰니스 리추얼</p>
-          </div>
-          <div class="card hover-lift group p-6 reveal">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold">재생</h3>
-              <span class="text-bronze group-hover:translate-x-1 transition">→</span>
-            </div>
-            <p class="mt-3 text-sm text-cocoa/70">부드러운 케어로 회복감을 전달</p>
-          </div>
-          <div class="card hover-lift group p-6 reveal">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold">이완</h3>
-              <span class="text-bronze group-hover:translate-x-1 transition">→</span>
-            </div>
-            <p class="mt-3 text-sm text-cocoa/70">긴장을 풀어주는 고요한 휴식의 순간</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Why It Works -->
-      <section class="max-w-6xl mx-auto px-6 py-14">
-        <div class="flex items-center justify-between gap-6 reveal">
-          <h2 class="text-2xl font-semibold">Why it works</h2>
-          <div class="section-line flex-1"></div>
-        </div>
-        <div class="mt-8 grid gap-6 md:grid-cols-3">
-          <div class="card p-7 hover-lift reveal">
-            <h3 class="text-lg font-semibold">사자발 약쑥</h3>
-            <p class="mt-3 text-sm text-cocoa/70">강화에서 재배된 원재료의 향과 온기가 깊은 몰입을 돕습니다.</p>
-          </div>
-          <div class="card p-7 hover-lift reveal">
-            <h3 class="text-lg font-semibold">훈연의 밀도</h3>
-            <p class="mt-3 text-sm text-cocoa/70">연무처럼 퍼지는 훈연이 편안한 호흡과 안정감을 제공합니다.</p>
-          </div>
-          <div class="card p-7 hover-lift reveal">
-            <h3 class="text-lg font-semibold">온열의 집중</h3>
-            <p class="mt-3 text-sm text-cocoa/70">하복부에 집중된 온열이 몸의 흐름을 정돈합니다.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3-Step Preview -->
-      <section class="max-w-6xl mx-auto px-6 py-14">
-        <div class="flex items-center justify-between gap-6 reveal">
-          <h2 class="text-2xl font-semibold">3단계 체험 요약</h2>
-          <div class="section-line flex-1"></div>
-        </div>
-        <div class="mt-8 grid gap-8 md:grid-cols-3">
-          <div class="card p-6 hover-lift reveal">
-            <img src="assets/images/index_banner.png" alt="준비 단계" class="h-40 w-full rounded-2xl object-cover" />
-            <h3 class="mt-5 text-lg font-semibold">Step 1. 준비 & 컨디션 체크</h3>
-            <p class="mt-2 text-sm text-cocoa/70">오늘의 컨디션을 확인하고 부드러운 리추얼로 시작합니다.</p>
-          </div>
-          <div class="card p-6 hover-lift reveal">
-            <img src="assets/images/jar-girl.png" alt="약쑥 훈연" class="h-40 w-full rounded-2xl object-cover" />
-            <h3 class="mt-5 text-lg font-semibold">Step 2. 약쑥 훈연 + 온열 집중</h3>
-            <p class="mt-2 text-sm text-cocoa/70">향과 온기가 동시에 스며드는 깊은 체험 구간입니다.</p>
-          </div>
-          <div class="card p-6 hover-lift reveal">
-            <img src="assets/images/tteum-girl.png" alt="마무리 케어" class="h-40 w-full rounded-2xl object-cover" />
-            <h3 class="mt-5 text-lg font-semibold">Step 3. 마무리 & 리커버리</h3>
-            <p class="mt-2 text-sm text-cocoa/70">뜨끈한 케어로 안정감을 더하며 마무리합니다.</p>
-          </div>
-        </div>
-        <div class="mt-8 flex justify-center reveal">
-          <a href="experience.html" class="px-6 py-3 rounded-full bg-cocoa text-white text-sm font-semibold hover:bg-bronze transition">Experience 페이지로 이동</a>
-        </div>
-      </section>
-
-      <!-- Quote -->
-      <section class="max-w-6xl mx-auto px-6 pb-20">
-        <div class="card p-10 text-center reveal">
-          <p class="text-xl md:text-2xl font-medium">“좌운은 온기와 향이 어우러져, 몸이 기억하는 가장 편안한 리듬을 되찾게 합니다.”</p>
-          <p class="mt-4 text-sm text-cocoa/60">약석원 좌운 체험관</p>
         </div>
       </section>
     </main>
 
-    <!-- Footer (shared) -->
-    <footer class="border-t border-wood/30 bg-ivory/80">
-      <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-sm">
-        <div>
-          <p class="font-semibold">약석원 좌운 체험관</p>
-          <p class="text-cocoa/60">강화 약쑥으로 완성하는 따뜻한 치유의 시간</p>
-        </div>
-        <div class="flex gap-4">
-          <a href="about.html" class="hover:text-bronze transition">About</a>
-          <a href="experience.html" class="hover:text-bronze transition">Experience</a>
-          <a href="explore.html" class="hover:text-bronze transition">Explore</a>
-        </div>
-      </div>
-    </footer>
-  </div>
-
-  <!-- IntersectionObserver -->
-  <script>
-    const elements = document.querySelectorAll(".reveal");
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      elements.forEach((el) => el.classList.add("in-view"));
-    } else {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("in-view");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.18 }
-      );
-      elements.forEach((el, index) => {
-        el.style.transitionDelay = `${Math.min(index * 70, 280)}ms`;
-        observer.observe(el);
-      });
-    }
-  </script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
