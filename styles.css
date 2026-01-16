@@ -66,8 +66,9 @@ img {
   text-decoration: none;
   color: var(--ink);
   font-weight: 600;
-  padding-bottom: 4px;
+  padding: 6px 10px 8px;
   border-bottom: 2px solid transparent;
+  background: transparent;
   transition: border-color 0.2s ease, color 0.2s ease;
 }
 
@@ -75,10 +76,16 @@ img {
 .nav-link:focus {
   color: var(--accent-strong);
   border-bottom-color: var(--accent);
+  background: transparent;
+}
+
+.nav-link:focus:not(.active) {
+  color: var(--ink);
+  border-bottom-color: transparent;
+  background: transparent;
 }
 
 .nav-link.active {
-  color: var(--accent);
   border-bottom-color: var(--accent);
 }
 
@@ -272,6 +279,233 @@ img {
 .card-grid {
   display: grid;
   gap: 18px;
+}
+
+.card-grid--horizontal {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 12px 8px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.card-grid--horizontal::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
+.card-grid--horizontal .card {
+  scroll-snap-align: start;
+  flex: 0 0 calc((100% - 32px) / 3);
+  max-width: calc((100% - 32px) / 3);
+  min-width: 260px;
+}
+
+.card-grid--horizontal .image-placeholder {
+  min-height: 180px;
+}
+
+.review-carousel .text-card {
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.review-carousel .text-card p {
+  flex: 1;
+  overflow: hidden;
+}
+
+.review-carousel .btn-more {
+  align-self: flex-start;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.review-carousel .btn-more:hover,
+.review-carousel .btn-more:focus {
+  background: var(--accent);
+  color: var(--surface);
+  border-color: var(--accent);
+}
+
+.review-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.carousel-btn {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  transition: filter 0.15s ease, background-color 0.2s ease, color 0.2s ease;
+  flex: 0 0 56px;
+}
+
+.carousel-btn:hover,
+.carousel-btn:focus {
+  background: var(--accent);
+  color: var(--surface);
+  border-color: var(--accent);
+}
+
+.carousel-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.carousel-btn img {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+.carousel-btn:active,
+.carousel-btn.is-pressed {
+  filter: brightness(0.7);
+}
+
+.card-grid--horizontal.is-dragging {
+  cursor: grabbing;
+}
+
+/* Modal for review details */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 50;
+}
+
+.modal-overlay.is-open {
+  display: flex;
+}
+
+.modal {
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+  max-width: 600px;
+  width: min(90vw, 640px);
+  max-height: 80vh;
+  padding: 24px;
+  display: grid;
+  gap: 16px;
+}
+
+.modal__media {
+  max-height: 220px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.modal__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal__title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.modal__close {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.modal__close:hover,
+.modal__close:focus {
+  background: var(--accent);
+  color: var(--surface);
+  border-color: var(--accent);
+}
+
+.modal__body {
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.modal__body p + p {
+  margin-top: 10px;
+}
+
+.review-more-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 260px;
+}
+
+.review-more-card__inner {
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(47,122,79,0.12), rgba(47,122,79,0.04));
+  border-radius: 18px;
+}
+
+.btn-review-more {
+  margin: 0 auto;
+}
+
+.review-carousel .image-placeholder {
+  min-height: 220px;
+  max-height: 220px;
+  width: 100%;
+}
+
+.review-carousel .image-placeholder img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 .card-grid.three {
