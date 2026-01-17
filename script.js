@@ -198,3 +198,77 @@ if (reviewCarousel) {
     card.appendChild(btn);
   });
 }
+
+const slideTrack = document.querySelector(".image-slides .slide-track");
+const slidePrev = document.querySelector(".image-slides .slide-btn.prev");
+const slideNext = document.querySelector(".image-slides .slide-btn.next");
+const slideDots = document.querySelectorAll(".image-slides .slide-dots .dot");
+
+if (slideTrack && (slidePrev || slideNext)) {
+  const getSlideStep = () => {
+    const slide = slideTrack.querySelector("img");
+    if (!slide) return 0;
+    const gap = parseFloat(getComputedStyle(slideTrack).gap || "0");
+    return slide.offsetWidth + gap;
+  };
+
+  const updateActiveDot = () => {
+    if (!slideTrack || slideDots.length === 0) return;
+    const maxScroll =
+      slideTrack.scrollWidth - slideTrack.clientWidth || 0;
+    const ratio = maxScroll ? slideTrack.scrollLeft / maxScroll : 0;
+    const targetIndex = Math.round(ratio * (slideDots.length - 1));
+    slideDots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === targetIndex);
+    });
+  };
+
+  const scrollSlides = (direction) => {
+    const step = getSlideStep();
+    if (!step) return;
+    slideTrack.scrollBy({ left: step * direction, behavior: "smooth" });
+  };
+
+  slidePrev?.addEventListener("click", () => scrollSlides(-1));
+  slideNext?.addEventListener("click", () => scrollSlides(1));
+
+  let isDragging = false;
+  let startX = 0;
+  let startScrollLeft = 0;
+
+  const startDrag = (event) => {
+    isDragging = true;
+    startX = event.clientX;
+    startScrollLeft = slideTrack.scrollLeft;
+    slideTrack.classList.add("is-dragging");
+  };
+
+  const drag = (event) => {
+    if (!isDragging) return;
+    const delta = startX - event.clientX;
+    slideTrack.scrollLeft = startScrollLeft + delta;
+  };
+
+  const stopDrag = () => {
+    isDragging = false;
+    slideTrack.classList.remove("is-dragging");
+  };
+
+  slideTrack.addEventListener("pointerdown", startDrag);
+  slideTrack.addEventListener("pointermove", drag);
+  slideTrack.addEventListener("pointerup", stopDrag);
+  slideTrack.addEventListener("pointerleave", stopDrag);
+  slideTrack.addEventListener("pointercancel", stopDrag);
+  slideTrack.addEventListener("scroll", updateActiveDot);
+
+  updateActiveDot();
+}
+
+const exploreLinks = document.querySelectorAll(".inline-link");
+exploreLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const id = link.dataset.cardId || "unknown";
+    alert(`Explore card: ${id}`);
+  });
+});

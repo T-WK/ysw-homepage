@@ -129,6 +129,7 @@ img {
 
 .text-card {
   background: var(--surface);
+  opacity: 0.75;
   border-radius: 14px;
   border: 1px solid var(--line);
   padding: 24px;
@@ -237,6 +238,39 @@ img {
 .image-slides {
   min-height: 260px;
   position: relative;
+  overflow: hidden;
+}
+
+.image-slides .slide-track {
+  display: flex;
+  gap: 12px;
+  padding-bottom: 4px;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  width: max-content;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.image-slides .slide-track.is-dragging {
+  cursor: grabbing;
+}
+
+.image-slides .slide-track::-webkit-scrollbar {
+  display: none;
+}
+
+.image-slides .slide-track img {
+  flex: 0 0 calc((100% - 12px) / 2);
+  height: 180px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  display: block;
+  scroll-snap-align: start;
 }
 
 .slide-btn {
@@ -259,6 +293,13 @@ img {
   right: 16px;
 }
 
+.slide-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 .slide-dots {
   position: absolute;
   bottom: 16px;
@@ -274,6 +315,11 @@ img {
   border-radius: 50%;
   background: var(--surface);
   border: 1px solid var(--line);
+}
+
+.slide-dots .dot.active {
+  background: var(--accent);
+  border-color: var(--accent-strong);
 }
 
 .card-grid {
@@ -506,6 +552,21 @@ img {
   width: 100%;
   object-fit: cover;
   border-radius: 12px;
+}
+
+.explore-grid .image-placeholder {
+  min-height: 220px;
+  max-height: 220px;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.explore-grid .image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .card-grid.three {
