@@ -263,12 +263,3 @@ if (slideTrack && (slidePrev || slideNext)) {
 
   updateActiveDot();
 }
-
-const exploreLinks = document.querySelectorAll(".inline-link");
-exploreLinks.forEach((link) => {
-  link.addEventListener("click", (event) => {
-    event.preventDefault();
-    const id = link.dataset.cardId || "unknown";
-    alert(`Explore card: ${id}`);
-  });
-});
