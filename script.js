@@ -1,5 +1,33 @@
 const navLinks = document.querySelectorAll(".nav-link");
 const sections = document.querySelectorAll("section");
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+const enableSectionAnimations = !prefersReducedMotion;
+
+const isSectionInViewport = (section) => {
+  const rect = section.getBoundingClientRect();
+  const viewportHeight =
+    window.innerHeight || document.documentElement.clientHeight;
+  return (
+    rect.top <= viewportHeight * 0.9 && rect.bottom >= viewportHeight * 0.1
+  );
+};
+
+const primeSectionVisibility = () => {
+  if (!enableSectionAnimations) return;
+  sections.forEach((section) => {
+    const isVisible = isSectionInViewport(section);
+    section.classList.toggle("is-visible", isVisible);
+  });
+};
+
+if (enableSectionAnimations) {
+  primeSectionVisibility();
+  document.body.classList.add("anim-ready");
+} else {
+  sections.forEach((section) => section.classList.add("is-visible"));
+}
 
 const setActiveSection = (id) => {
   navLinks.forEach((link) => {
@@ -13,6 +41,9 @@ const setActiveSection = (id) => {
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
+      if (enableSectionAnimations) {
+        entry.target.classList.toggle("is-visible", entry.isIntersecting);
+      }
       if (entry.isIntersecting) {
         const id = entry.target.getAttribute("id");
         setActiveSection(id);
@@ -33,6 +64,13 @@ const handleScroll = () => {
   const header = document.querySelector(".site-header");
   const offset = (header?.offsetHeight || 0) + 12;
   let currentId = null;
+
+  if (enableSectionAnimations) {
+    sections.forEach((section) => {
+      const visible = isSectionInViewport(section);
+      section.classList.toggle("is-visible", visible);
+    });
+  }
 
   sections.forEach((section) => {
     const rect = section.getBoundingClientRect();
@@ -78,6 +116,7 @@ navLinks.forEach((link) => {
 // Initialize: highlight Home on first load
 setActiveSection("home");
 handleScroll();
+window.addEventListener("load", primeSectionVisibility);
 
 // Review carousel controls (horizontal scroll)
 const reviewCarousel = document.querySelector(".review-carousel");
