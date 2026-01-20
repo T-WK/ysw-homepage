@@ -154,6 +154,9 @@ body.anim-ready .section.is-visible {
 
 .text-area-center {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .text-card h2,
@@ -230,8 +233,14 @@ body.anim-ready .section.is-visible {
 
 .image-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
+}
+
+.row-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .block-title {
@@ -251,14 +260,18 @@ body.anim-ready .section.is-visible {
 }
 
 .block-c {
-  display: grid;
   grid-template-columns: 1.2fr 1fr;
-  gap: 28px;
   align-items: start;
+}
+
+.block-c .block-text {
+  margin: 28px 0;
 }
 
 .image-slides {
   min-height: 260px;
+  padding: 0 10px;
+  margin: 28px 0;
   position: relative;
   overflow: hidden;
 }
@@ -286,8 +299,8 @@ body.anim-ready .section.is-visible {
 }
 
 .image-slides .slide-track img {
-  flex: 0 0 calc((100% - 12px) / 2);
-  height: 180px;
+  flex: 0 0 calc((97.5% - 12px) / 4);
+  height: 220px;
   object-fit: cover;
   border-radius: 14px;
   border: 1px solid var(--line);
