@@ -1,3 +1,10 @@
+const MAP_IMAGE_SRC = "assets/images/naver_map.png";
+const STORE_ADDRESS_TEXT = "월곶중앙로14번길 65-1 경성빌딩 2층";
+const MAP_MIN_SCALE = 1;
+const MAP_MAX_SCALE = 4;
+const MAP_ZOOM_STEP = 0.25;
+const MAP_WHEEL_STEP = 0.2;
+
 const navLinks = document.querySelectorAll(".nav-link");
 const sections = document.querySelectorAll("section");
 const prefersReducedMotion = window.matchMedia(
@@ -302,3 +309,277 @@ if (slideTrack && (slidePrev || slideNext)) {
 
   updateActiveDot();
 }
+
+// Directions: map modal + zoom/pan
+const mapPreviewButton = document.querySelector("[data-map-open]");
+const mapModalOverlay = document.querySelector("[data-map-modal]");
+const mapModalClose = mapModalOverlay?.querySelector(".map-modal__close");
+const mapModalImg = mapModalOverlay?.querySelector(".map-panzoom__image");
+const mapViewer = mapModalOverlay?.querySelector("[data-map-viewer]");
+const mapPanzoom = mapModalOverlay?.querySelector("[data-map-panzoom]");
+const zoomInBtn = mapModalOverlay?.querySelector("[data-zoom-in]");
+const zoomOutBtn = mapModalOverlay?.querySelector("[data-zoom-out]");
+const zoomResetBtn = mapModalOverlay?.querySelector("[data-zoom-reset]");
+const mapOpenButtons = document.querySelectorAll("[data-map-open], .btn-open-map");
+const addressTextEl = document.querySelector(".directions__address-text");
+const copyAddressBtn = document.querySelector(".btn-copy-address");
+const toastEl = document.querySelector(".toast");
+
+if (mapModalImg) {
+  mapModalImg.src = MAP_IMAGE_SRC;
+}
+const mapPreviewImg = mapPreviewButton?.querySelector(".map-preview__image");
+if (mapPreviewImg) {
+  mapPreviewImg.src = MAP_IMAGE_SRC;
+}
+if (addressTextEl) {
+  addressTextEl.textContent = STORE_ADDRESS_TEXT;
+}
+
+let toastTimer;
+const showToast = (message, isError = false) => {
+  if (!toastEl) return;
+  toastEl.textContent = message;
+  toastEl.classList.toggle("is-error", isError);
+  toastEl.classList.add("is-visible");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toastEl.classList.remove("is-visible");
+    toastEl.classList.remove("is-error");
+  }, 2200);
+};
+
+const copyAddress = async () => {
+  const text = STORE_ADDRESS_TEXT;
+  if (!text) return;
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      showToast("주소를 복사했습니다.");
+      return;
+    }
+  } catch (error) {
+    // Fallback below
+  }
+
+  try {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    const successful = document.execCommand("copy");
+    document.body.removeChild(textarea);
+    if (successful) {
+      showToast("주소를 복사했습니다.");
+    } else {
+      throw new Error("execCommand copy failed");
+    }
+  } catch (error) {
+    showToast("주소 복사에 실패했어요. 다시 시도해주세요.", true);
+  }
+};
+copyAddressBtn?.addEventListener("click", copyAddress);
+
+const mapState = {
+  scale: MAP_MIN_SCALE,
+  tx: 0,
+  ty: 0,
+  naturalWidth: 0,
+  naturalHeight: 0,
+};
+let isMapOpen = false;
+let previousBodyOverflow = "";
+
+const syncNaturalSize = () => {
+  if (!mapModalImg) return;
+  mapState.naturalWidth = mapModalImg.naturalWidth || mapState.naturalWidth;
+  mapState.naturalHeight = mapModalImg.naturalHeight || mapState.naturalHeight;
+};
+
+mapModalImg?.addEventListener("load", () => {
+  syncNaturalSize();
+  renderMapTransform();
+});
+if (mapModalImg?.complete) {
+  syncNaturalSize();
+}
+
+const getBaseSize = () => {
+  const viewerRect = mapPanzoom?.getBoundingClientRect();
+  if (!viewerRect) {
+    return {
+      baseWidth: 0,
+      baseHeight: 0,
+      containerWidth: 0,
+      containerHeight: 0,
+    };
+  }
+  const naturalWidth = mapState.naturalWidth || viewerRect.width || 1;
+  const naturalHeight = mapState.naturalHeight || viewerRect.height || 1;
+  const fitScale = Math.min(
+    viewerRect.width / naturalWidth || 1,
+    viewerRect.height / naturalHeight || 1
+  );
+  return {
+    baseWidth: naturalWidth * fitScale,
+    baseHeight: naturalHeight * fitScale,
+    containerWidth: viewerRect.width,
+    containerHeight: viewerRect.height,
+  };
+};
+
+const clampTranslation = () => {
+  const { baseWidth, baseHeight, containerWidth, containerHeight } = getBaseSize();
+  const scaledWidth = baseWidth * mapState.scale;
+  const scaledHeight = baseHeight * mapState.scale;
+  const limitX = Math.max((scaledWidth - containerWidth) / 2, 0);
+  const limitY = Math.max((scaledHeight - containerHeight) / 2, 0);
+
+  mapState.tx = Math.min(limitX, Math.max(-limitX, mapState.tx));
+  mapState.ty = Math.min(limitY, Math.max(-limitY, mapState.ty));
+};
+
+const renderMapTransform = () => {
+  if (!mapModalImg) return;
+  clampTranslation();
+  mapModalImg.style.transform = `scale(${mapState.scale}) translate(${mapState.tx}px, ${mapState.ty}px)`;
+};
+
+const resetMapPosition = (animate = true) => {
+  mapState.scale = MAP_MIN_SCALE;
+  mapState.tx = 0;
+  mapState.ty = 0;
+  if (animate && mapModalImg) {
+    mapModalImg.classList.add("is-resetting");
+    setTimeout(() => mapModalImg.classList.remove("is-resetting"), 260);
+  }
+  renderMapTransform();
+};
+
+const handleZoom = (deltaScale, center) => {
+  const nextScale = Math.min(
+    MAP_MAX_SCALE,
+    Math.max(MAP_MIN_SCALE, mapState.scale + deltaScale)
+  );
+  if (nextScale === mapState.scale) return;
+
+  const viewerRect = mapViewer?.getBoundingClientRect();
+  if (viewerRect) {
+    const originX = center?.x ?? viewerRect.left + viewerRect.width / 2;
+    const originY = center?.y ?? viewerRect.top + viewerRect.height / 2;
+    if (Number.isFinite(originX) && Number.isFinite(originY)) {
+      const centerX = originX - (viewerRect.left + viewerRect.width / 2);
+      const centerY = originY - (viewerRect.top + viewerRect.height / 2);
+      const scaleFactor = nextScale / mapState.scale;
+      mapState.tx -= centerX * (scaleFactor - 1);
+      mapState.ty -= centerY * (scaleFactor - 1);
+    }
+  }
+
+  mapState.scale = nextScale;
+  renderMapTransform();
+};
+
+const openMapModal = () => {
+  if (!mapModalOverlay) return;
+  mapModalOverlay.classList.add("is-open");
+  previousBodyOverflow = document.body.style.overflow;
+  document.body.style.overflow = "hidden";
+  isMapOpen = true;
+  requestAnimationFrame(() => resetMapPosition(false));
+  mapModalClose?.focus();
+};
+
+const closeMapModal = () => {
+  if (!mapModalOverlay) return;
+  mapModalOverlay.classList.remove("is-open");
+  document.body.style.overflow = previousBodyOverflow;
+  previousBodyOverflow = "";
+  isMapOpen = false;
+  resetMapPosition(false);
+};
+
+mapOpenButtons.forEach((btn) => btn.addEventListener("click", openMapModal));
+mapModalClose?.addEventListener("click", closeMapModal);
+mapModalOverlay?.addEventListener("click", (event) => {
+  if (event.target === mapModalOverlay) {
+    closeMapModal();
+  }
+});
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && isMapOpen) {
+    closeMapModal();
+  }
+});
+
+let isPanning = false;
+let startX = 0;
+let startY = 0;
+let startTx = 0;
+let startTy = 0;
+
+const startPan = (event) => {
+  if (!mapPanzoom) return;
+  isPanning = true;
+  startX = event.clientX ?? 0;
+  startY = event.clientY ?? 0;
+  startTx = mapState.tx;
+  startTy = mapState.ty;
+  mapPanzoom.classList.add("is-panning");
+  if (event.pointerId !== undefined) {
+    mapPanzoom.setPointerCapture(event.pointerId);
+  }
+};
+
+const panMove = (event) => {
+  if (!isPanning) return;
+  const currentX = event.clientX ?? 0;
+  const currentY = event.clientY ?? 0;
+  mapState.tx = startTx + (currentX - startX);
+  mapState.ty = startTy + (currentY - startY);
+  renderMapTransform();
+};
+
+const endPan = (event) => {
+  if (!mapPanzoom) return;
+  isPanning = false;
+  mapPanzoom.classList.remove("is-panning");
+  if (event?.pointerId !== undefined) {
+    mapPanzoom.releasePointerCapture(event.pointerId);
+  }
+};
+
+mapPanzoom?.addEventListener("pointerdown", (event) => {
+  event.preventDefault();
+  startPan(event);
+});
+mapPanzoom?.addEventListener("pointermove", (event) => {
+  if (isPanning) {
+    event.preventDefault();
+    panMove(event);
+  }
+});
+mapPanzoom?.addEventListener("pointerup", endPan);
+mapPanzoom?.addEventListener("pointerleave", endPan);
+mapPanzoom?.addEventListener("pointercancel", endPan);
+mapPanzoom?.addEventListener(
+  "wheel",
+  (event) => {
+    event.preventDefault();
+    const delta = event.deltaY < 0 ? MAP_WHEEL_STEP : -MAP_WHEEL_STEP;
+    handleZoom(delta, { x: event.clientX, y: event.clientY });
+  },
+  { passive: false }
+);
+
+zoomInBtn?.addEventListener("click", () => handleZoom(MAP_ZOOM_STEP));
+zoomOutBtn?.addEventListener("click", () => handleZoom(-MAP_ZOOM_STEP));
+zoomResetBtn?.addEventListener("click", () => resetMapPosition(true));
+
+window.addEventListener("resize", () => {
+  if (isMapOpen) {
+    renderMapTransform();
+  }
+});
