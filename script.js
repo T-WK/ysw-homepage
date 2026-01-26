@@ -4,6 +4,11 @@ const MAP_MIN_SCALE = 1;
 const MAP_MAX_SCALE = 4;
 const MAP_ZOOM_STEP = 0.25;
 const MAP_WHEEL_STEP = 0.2;
+const PARKING_IMAGES = [
+  "assets/images/parking-images/parking_1.jpg",
+  "assets/images/parking-images/parking_2.jpg",
+  "assets/images/parking-images/parking_3.jpg",
+];
 
 const navLinks = document.querySelectorAll(".nav-link");
 const sections = document.querySelectorAll("section");
@@ -308,6 +313,123 @@ if (slideTrack && (slidePrev || slideNext)) {
   slideTrack.addEventListener("scroll", updateActiveDot);
 
   updateActiveDot();
+}
+
+// Parking slider + modal
+const parkingSlider = document.querySelector("[data-parking-slider]");
+const parkingImageEl = parkingSlider?.querySelector("[data-parking-image]");
+const parkingPrevBtn = parkingSlider?.querySelector("[data-parking-prev]");
+const parkingNextBtn = parkingSlider?.querySelector("[data-parking-next]");
+const parkingIndicator = parkingSlider?.querySelector("[data-parking-indicator]");
+const parkingDotsContainer = parkingSlider?.querySelector("[data-parking-dots]");
+const parkingModalOverlay = document.querySelector("[data-parking-modal]");
+const parkingModalClose = parkingModalOverlay?.querySelector("[data-parking-modal-close]");
+const parkingModalImage = parkingModalOverlay?.querySelector("[data-parking-modal-image]");
+
+if (parkingSlider && parkingImageEl && PARKING_IMAGES.length > 0) {
+  let parkingIndex = 0;
+  let parkingModalPreviousOverflow = "";
+  let isParkingModalOpen = false;
+
+  const setParkingModalImage = () => {
+    if (!parkingModalImage) return;
+    parkingModalImage.src = PARKING_IMAGES[parkingIndex] || "";
+    parkingModalImage.alt = `주차 안내 이미지 ${parkingIndex + 1}`;
+  };
+
+  const updateParkingIndicator = () => {
+    const total = PARKING_IMAGES.length;
+    if (parkingIndicator) {
+      parkingIndicator.textContent = `${parkingIndex + 1} / ${total}`;
+    }
+    if (!parkingDotsContainer) return;
+    const dots = parkingDotsContainer.querySelectorAll(".parking__dot");
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("is-active", index === parkingIndex);
+    });
+  };
+
+  const setParkingSlide = (nextIndex) => {
+    const total = PARKING_IMAGES.length;
+    if (total === 0) return;
+    parkingIndex = (nextIndex + total) % total;
+    parkingImageEl.src = PARKING_IMAGES[parkingIndex];
+    parkingImageEl.alt = `주차 안내 이미지 ${parkingIndex + 1}`;
+    setParkingModalImage();
+    updateParkingIndicator();
+  };
+
+  const moveParkingSlide = (delta) => {
+    setParkingSlide(parkingIndex + delta);
+  };
+
+  const buildParkingDots = () => {
+    if (!parkingDotsContainer) return;
+    parkingDotsContainer.innerHTML = "";
+    PARKING_IMAGES.forEach((_, index) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "parking__dot";
+      dot.setAttribute("aria-label", `${index + 1}번째 주차 이미지 보기`);
+      dot.addEventListener("click", () => setParkingSlide(index));
+      parkingDotsContainer.appendChild(dot);
+    });
+  };
+
+  const openParkingModal = () => {
+    if (!parkingModalOverlay) return;
+    isParkingModalOpen = true;
+    parkingModalPreviousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    setParkingModalImage();
+    parkingModalOverlay.classList.add("is-open");
+    parkingModalClose?.focus();
+  };
+
+  const closeParkingModal = () => {
+    if (!parkingModalOverlay) return;
+    parkingModalOverlay.classList.remove("is-open");
+    document.body.style.overflow = parkingModalPreviousOverflow;
+    isParkingModalOpen = false;
+  };
+
+  buildParkingDots();
+  setParkingSlide(0);
+
+  parkingPrevBtn?.addEventListener("click", () => moveParkingSlide(-1));
+  parkingNextBtn?.addEventListener("click", () => moveParkingSlide(1));
+  parkingImageEl.addEventListener("click", openParkingModal);
+
+  parkingSlider.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      moveParkingSlide(-1);
+    } else if (event.key === "ArrowRight") {
+      event.preventDefault();
+      moveParkingSlide(1);
+    } else if (event.key === "Enter" || event.key === " ") {
+      if (document.activeElement === parkingImageEl) {
+        event.preventDefault();
+        openParkingModal();
+      }
+    }
+  });
+
+  parkingModalOverlay?.addEventListener("click", (event) => {
+    if (event.target === parkingModalOverlay) {
+      closeParkingModal();
+    }
+  });
+  parkingModalClose?.addEventListener("click", closeParkingModal);
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && isParkingModalOpen) {
+      closeParkingModal();
+    } else if (event.key === "ArrowLeft" && isParkingModalOpen) {
+      moveParkingSlide(-1);
+    } else if (event.key === "ArrowRight" && isParkingModalOpen) {
+      moveParkingSlide(1);
+    }
+  });
 }
 
 // Directions: map modal + zoom/pan

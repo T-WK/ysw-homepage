@@ -632,11 +632,64 @@
                 <button type="button" class="btn btn-primary btn-copy-address">
                   주소 복사
                 </button>
-                <button type="button" class="btn btn-accent btn-open-map">
-                  지도 상세 보기
-                </button>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="parking" class="section parking" aria-label="주차 안내">
+        <div class="container">
+          <h2 class="block-title">주차 안내</h2>
+          <p class="section-lead parking__lead">
+            주차 위치와 동선을 사진으로 안내드립니다.
+          </p>
+
+          <div class="parking__slider" data-parking-slider tabindex="0">
+            <div class="parking__viewport">
+              <div class="parking__image-frame">
+                <img
+                  src="assets/images/parking-images/parking_1.jpg"
+                  alt="주차 안내 이미지 1"
+                  loading="lazy"
+                  data-parking-image
+                />
+              </div>
+              <div class="parking__meta">
+                <div class="parking__indicator" data-parking-indicator>
+                  1 / 3
+                </div>
+                <div
+                  class="parking__dots"
+                  data-parking-dots
+                  aria-label="주차 이미지 이동"
+                ></div>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="parking__nav parking__nav--prev"
+              aria-label="이전 이미지"
+              data-parking-prev
+            >
+              <img
+                src="assets/icons/left-empty-arrow.png"
+                alt=""
+                aria-hidden="true"
+              />
+            </button>
+            <button
+              type="button"
+              class="parking__nav parking__nav--next"
+              aria-label="다음 이미지"
+              data-parking-next
+            >
+              <img
+                src="assets/icons/right-empty-arrow.png"
+                alt=""
+                aria-hidden="true"
+              />
+            </button>
           </div>
         </div>
       </section>
@@ -894,6 +947,35 @@
         </div>
       </section>
     </main>
+
+    <div class="modal-overlay parking-modal-overlay" data-parking-modal>
+      <div
+        class="modal modal--image"
+        role="dialog"
+        aria-modal="true"
+        aria-label="주차 이미지 확대 보기"
+      >
+        <div class="modal__header">
+          <h3 class="modal__title">주차 이미지 확대</h3>
+          <button
+            type="button"
+            class="modal__close"
+            aria-label="닫기"
+            data-parking-modal-close
+          >
+            ×
+          </button>
+        </div>
+        <div class="parking-modal__body">
+          <img
+            src=""
+            alt="확대된 주차 안내 이미지"
+            loading="lazy"
+            data-parking-modal-image
+          />
+        </div>
+      </div>
+    </div>
 
     <div class="map-modal-overlay" data-map-modal>
       <div
