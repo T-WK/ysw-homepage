@@ -1225,6 +1225,32 @@ body.anim-ready .section.is-visible {
     min-height: 240px;
   }
 
+  .review-carousel {
+    align-items: stretch;
+    padding-bottom: 64px;
+  }
+
+  .review-carousel .card-grid--horizontal {
+    width: 100%;
+  }
+
+  .review-carousel .carousel-btn {
+    bottom: 8px;
+    height: 48px;
+    position: absolute;
+    top: auto;
+    transform: none;
+    width: 48px;
+  }
+
+  .review-carousel .carousel-btn.prev {
+    left: 8px;
+  }
+
+  .review-carousel .carousel-btn.next {
+    right: 8px;
+  }
+
   .parking__image-frame {
     height: 445px;
   }
