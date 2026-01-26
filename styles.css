@@ -69,7 +69,9 @@ img {
   padding: 6px 10px 8px;
   border-bottom: 2px solid transparent;
   background: transparent;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .nav-link:hover,
@@ -97,7 +99,9 @@ img {
 body.anim-ready .section {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
   will-change: opacity, transform;
 }
 
@@ -179,7 +183,9 @@ body.anim-ready .section.is-visible {
   border-radius: 999px;
   text-decoration: none;
   font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .btn-primary {
@@ -525,7 +531,10 @@ body.anim-ready .section.is-visible {
   place-items: center;
   cursor: pointer;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-  transition: filter 0.15s ease, background-color 0.2s ease, color 0.2s ease;
+  transition:
+    filter 0.15s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
   flex: 0 0 56px;
 }
 
@@ -780,7 +789,9 @@ body.anim-ready .section.is-visible {
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.18);
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
   pointer-events: none;
   z-index: 70;
 }
@@ -810,7 +821,11 @@ body.anim-ready .section.is-visible {
   justify-content: center;
   gap: 12px;
   text-align: center;
-  background: linear-gradient(180deg, rgba(47,122,79,0.12), rgba(47,122,79,0.04));
+  background: linear-gradient(
+    180deg,
+    rgba(47, 122, 79, 0.12),
+    rgba(47, 122, 79, 0.04)
+  );
   border-radius: 18px;
 }
 
@@ -903,6 +918,14 @@ body.anim-ready .section.is-visible {
   display: grid;
   gap: 12px;
 }
+.explore-card:hover {
+  border-radius: 12px;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
 
 .inline-link {
   color: var(--accent-strong);
@@ -914,7 +937,7 @@ body.anim-ready .section.is-visible {
 
 .inline-link:hover,
 .inline-link:focus {
-  border-bottom-color: var(--accent-strong);
+  text-decoration-line: none;
 }
 
 @media (max-width: 1024px) {
