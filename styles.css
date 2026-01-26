@@ -256,7 +256,6 @@ body.anim-ready .section.is-visible {
 }
 
 .directions__layout {
-  display: grid;
   grid-template-columns: 1.6fr 1fr;
   gap: 24px;
   align-items: stretch;
