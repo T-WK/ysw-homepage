@@ -5,6 +5,8 @@ const MAP_MAX_SCALE = 4;
 const MAP_ZOOM_STEP = 0.25;
 const MAP_WHEEL_STEP = 0.2;
 const PARKING_IMAGES = [
+  "assets/images/parking-images/parking_4.jpg",
+  "assets/images/parking-images/parking_5.jpg",
   "assets/images/parking-images/parking_1.jpg",
   "assets/images/parking-images/parking_2.jpg",
   "assets/images/parking-images/parking_3.jpg",
